@@ -7,23 +7,26 @@ import java.util.Objects;
 public class ServicoPrestado {
     private int id;
     private Servico servico;
-    private LocalDate data;
     private double valorCobrado;
     private Pet pet;
+    private LocalDate data;
 
     public ServicoPrestado() {
-        this.data = LocalDate.now();
     }
 
-    public ServicoPrestado(int id, Servico servico, double valorCobrado, Pet pet) {
-        this();
+    public ServicoPrestado(int id, Servico servico, double valorCobrado, Pet pet, LocalDate data) {
         this.id = id;
         this.servico = servico;
         this.valorCobrado = valorCobrado;
         this.pet = pet;
+        this.data = data;
     }
 
+    public ServicoPrestado(int id, Servico servico, double valorCobrado, Pet pet) {
+        this(id, servico, valorCobrado, pet, LocalDate.now());
+    }
 
+    @Override
     public int hashCode() {
         return Objects.hash(id, data, pet);
     }
@@ -36,6 +39,7 @@ public class ServicoPrestado {
         this.pet = pet;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ServicoPrestado that = (ServicoPrestado) o;
@@ -61,6 +65,7 @@ public class ServicoPrestado {
         this.servico = servico;
     }
 
+    @Override
     public String toString() {
         return "Serviço prestado " + id + " {" +
                 "\n\tServiço: " + servico.toString() +

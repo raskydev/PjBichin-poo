@@ -11,11 +11,12 @@ public class Cliente {
     }
 
     public Cliente(int id, String nome, String telefone) {
-        this.nome = nome;
         this.id = id;
+        this.nome = nome;
         this.telefone = telefone;
     }
 
+    @Override
     public String toString() {
         return "Cliente " + id + " [" +
                 "\n\tNome = " + nome +
@@ -43,12 +44,14 @@ public class Cliente {
         return id;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
         return id == cliente.id && Objects.equals(telefone, cliente.telefone);
     }
 
+    @Override
     public int hashCode() {
         return Objects.hash(id, telefone);
     }

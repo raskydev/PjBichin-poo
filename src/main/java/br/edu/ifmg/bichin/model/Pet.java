@@ -68,6 +68,7 @@ public class Pet {
         return id;
     }
 
+    @Override
     public int hashCode() {
         return Objects.hash(id, cliente, nascimento);
     }
@@ -92,6 +93,7 @@ public class Pet {
         this.nascimento = nascimento;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;

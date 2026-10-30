@@ -5,12 +5,12 @@ import java.util.Objects;
 public class Servico {
     private String descricao;
     private int id;
-    private float valor;
+    private double valor;
 
     public Servico() {
     }
 
-    public Servico(int id, String descricao, float valor) {
+    public Servico(int id, String descricao, double valor) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
@@ -24,6 +24,7 @@ public class Servico {
         this.descricao = descricao;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Servico servico = (Servico) o;
@@ -34,10 +35,11 @@ public class Servico {
         return descricao;
     }
 
-    public void setValor(float valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
+    @Override
     public int hashCode() {
         return Objects.hash(descricao, id);
     }
@@ -46,6 +48,7 @@ public class Servico {
         return id;
     }
 
+    @Override
     public String toString() {
         return "Serviço " + id + " [" +
                 "\n\tValor: " + valor +
@@ -53,7 +56,7 @@ public class Servico {
                 "\n]";
     }
 
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
 
