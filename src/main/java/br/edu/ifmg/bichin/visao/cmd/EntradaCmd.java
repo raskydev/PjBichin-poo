@@ -1,9 +1,17 @@
 package br.edu.ifmg.bichin.visao.cmd;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Scanner;
 
 // Essa parte foi desenvolvida além da especifiação do trabalho, que visa evitar o famoso Ctrl+C e Ctrl+V de código
 public class EntradaCmd {
+    private static final DateTimeFormatter FORMATO_DATA =
+            DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+    // Para que datas impossíveis sejam recusadas, eg: 30/02, foi utilizado ResolverStyle.STRICT
+
     private Scanner teclado;
 
     public EntradaCmd() {
@@ -72,4 +80,31 @@ public class EntradaCmd {
             return false;
         }
     }
+
+    public String lerTelefone(String texto) {
+        String t;
+        while (true) {
+            t = lerString(texto).toLowerCase();
+            if (t.matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) {
+                break;
+            } else {
+                System.out.print("Formato inválido! Espera-se (dd) ddddd-dddd! ");
+            }
+        }
+        return t;
+    }
+
+    public LocalDate lerData(String texto) {
+        LocalDate d;
+        while (true) {
+            try {
+                d = LocalDate.parse(lerString(texto), FORMATO_DATA);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato inválido! Espera-se dd/MM/yyyy");
+            }
+        }
+        return d;
+    }
+
 }

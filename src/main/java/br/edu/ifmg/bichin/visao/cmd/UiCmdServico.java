@@ -115,7 +115,7 @@ public class UiCmdServico {
         Servico s = controller.buscar(id);
 
         if (s != null) {
-
+            System.out.println(s.toString());
             if (entrada.lerConfirmacao("Esse serviço mesmo que gostaria de excluir? (s/n): ")) {
                 if (controller.remover(id)) {
                     System.out.printf("\tServiço [%d] excluído com sucesso!\n", id);
