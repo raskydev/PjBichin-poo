@@ -64,7 +64,7 @@ public class UiCmdServico {
     }
 
     private void alterar() {
-        int id = entrada.lerInteiro("Digite o id do serviço que deseja alterar: ");
+        int id = entrada.lerInteiro("Digite o ID do serviço que deseja alterar: ");
 
         Servico s = controller.buscar(id);
 
@@ -96,7 +96,7 @@ public class UiCmdServico {
 
     private void adicionar() {
         while (true) {
-            int id = entrada.lerInteiro("Digite um id: ");
+            int id = entrada.lerInteiro("Digite um ID: ");
             if (controller.buscar(id) == null) {
                 String descricao = entrada.lerString("Digite a descrição: ");
                 double valor = entrada.lerValor("Digite o valor: ");
@@ -111,7 +111,7 @@ public class UiCmdServico {
     }
 
     private void apagar() {
-        int id = entrada.lerInteiro("Digite o id do serviço para EXCLUIR: ");
+        int id = entrada.lerInteiro("Digite o ID do serviço para EXCLUIR: ");
         Servico s = controller.buscar(id);
 
         if (s != null) {
@@ -130,7 +130,7 @@ public class UiCmdServico {
     }
 
     private void buscar() {
-        int id = entrada.lerInteiro("Digite o id do serviço: ");
+        int id = entrada.lerInteiro("Digite o ID do serviço: ");
         Servico s = controller.buscar(id);
 
         if (s != null) {
