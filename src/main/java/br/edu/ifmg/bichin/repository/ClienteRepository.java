@@ -23,7 +23,6 @@ public class ClienteRepository {
         ArrayList<Cliente> listaClientes = new ArrayList<Cliente>(clientes);
 
         return listaClientes;
-
     }
 
     public Cliente buscarPorId(int id) {
@@ -54,7 +53,7 @@ public class ClienteRepository {
                 String linha = a.nextLine();
                 String[] tokens = linha.split("\\;");
 
-                if (tokens.length == 3){
+                if (tokens.length == 3) {
                     Cliente cliente = new Cliente(
                             Integer.parseInt(tokens[0].trim()),
                             tokens[1],

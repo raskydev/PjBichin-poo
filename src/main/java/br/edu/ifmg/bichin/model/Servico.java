@@ -51,7 +51,7 @@ public class Servico {
     @Override
     public String toString() {
         return "Serviço " + id + " [" +
-                "\n\tValor: " + valor +
+                "\n\tValor: %.2f".formatted(valor)  +
                 "\n\tDescrição: " + descricao +
                 "\n]";
     }

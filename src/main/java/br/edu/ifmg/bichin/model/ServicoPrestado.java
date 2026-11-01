@@ -22,9 +22,6 @@ public class ServicoPrestado {
         this.data = data;
     }
 
-    public ServicoPrestado(int id, Servico servico, double valorCobrado, Pet pet) {
-        this(id, servico, valorCobrado, pet, LocalDate.now());
-    }
 
     @Override
     public int hashCode() {
@@ -70,7 +67,7 @@ public class ServicoPrestado {
         return "Serviço prestado " + id + " {" +
                 "\n\tServiço: " + servico.toString() +
                 "\n\tData: " + data +
-                "\n\tValor cobrado: " + valorCobrado +
+                "\n\tValor cobrado: %.2f".formatted(valorCobrado)+
                 "\n\tPet: " + pet.toString() +
                 "\n}";
     }
