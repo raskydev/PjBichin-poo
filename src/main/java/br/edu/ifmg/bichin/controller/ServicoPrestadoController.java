@@ -31,7 +31,7 @@ public class ServicoPrestadoController {
         return repository.maiorValorPorCliente(cliente);
     }
 
-    public boolean removerServicoPrestado(int id) {
+    public boolean remover(int id) {
         return repository.remover(id);
     }
 

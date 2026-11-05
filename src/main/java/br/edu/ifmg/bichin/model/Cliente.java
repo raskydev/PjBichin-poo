@@ -48,12 +48,12 @@ public class Cliente {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return id == cliente.id && Objects.equals(telefone, cliente.telefone);
+        return id == cliente.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, telefone);
+        return Objects.hash(id);
     }
 
     public void setId(int id) {

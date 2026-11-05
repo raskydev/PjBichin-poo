@@ -28,7 +28,7 @@ public class Servico {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Servico servico = (Servico) o;
-        return id == servico.id && Objects.equals(descricao, servico.descricao);
+        return id == servico.id;
     }
 
     public String getDescricao() {
@@ -41,7 +41,7 @@ public class Servico {
 
     @Override
     public int hashCode() {
-        return Objects.hash(descricao, id);
+        return Objects.hash(id);
     }
 
     public int getId() {

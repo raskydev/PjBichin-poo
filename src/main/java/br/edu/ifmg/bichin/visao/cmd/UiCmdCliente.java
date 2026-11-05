@@ -16,7 +16,7 @@ public class UiCmdCliente {
 
 
     private void buscar() {
-        int id = entrada.lerInteiro("Digite o ID do serviço: ");
+        int id = entrada.lerInteiro("Digite o ID do cliente: ");
         Cliente c = controller.buscar(id);
 
         if (c != null) {
@@ -73,7 +73,7 @@ public class UiCmdCliente {
                break;
 
                 case 0:
-                    System.out.println("Saindo...");
+                    System.out.println("Voltando ao menu principal...");
                 break;
 
                 default:

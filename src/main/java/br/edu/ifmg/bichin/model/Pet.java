@@ -1,6 +1,7 @@
 package br.edu.ifmg.bichin.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 public class Pet {
@@ -33,7 +34,7 @@ public class Pet {
     }
 
     public int getIdade() {
-        return (int) LocalDate.now().getYear() - this.nascimento.getYear();
+        return Period.between(this.nascimento, LocalDate.now()).getYears();
     }
 
     public void setEspecie(String especie) {
@@ -70,7 +71,7 @@ public class Pet {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cliente, nascimento);
+        return Objects.hash(id);
     }
 
     public String getEspecie() {
@@ -97,7 +98,7 @@ public class Pet {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;
-        return id == pet.id && Objects.equals(cliente, pet.cliente) && Objects.equals(nascimento, pet.nascimento);
+        return id == pet.id;
     }
 
 }

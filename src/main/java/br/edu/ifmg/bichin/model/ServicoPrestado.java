@@ -2,6 +2,7 @@ package br.edu.ifmg.bichin.model;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public class ServicoPrestado {
@@ -25,7 +26,7 @@ public class ServicoPrestado {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, data, pet);
+        return Objects.hash(id);
     }
 
     public Servico getServico() {
@@ -40,7 +41,7 @@ public class ServicoPrestado {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ServicoPrestado that = (ServicoPrestado) o;
-        return id == that.id && Objects.equals(data, that.data) && Objects.equals(pet, that.pet);
+        return id == that.id;
     }
 
     public Pet getPet() {
@@ -48,10 +49,7 @@ public class ServicoPrestado {
     }
 
     public int getDiasDaExecucaoServico() {
-        Period periodo = Period.between(LocalDate.now(), data);
-
-        return periodo.getDays();
-
+        return (int) ChronoUnit.DAYS.between(data, LocalDate.now());
     }
 
     public void setValorCobrado(double valorCobrado) {

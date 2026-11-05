@@ -53,7 +53,7 @@ public class UiCmdServico {
                 break;
 
                 case 0:
-                    System.out.println("Saindo...");
+                    System.out.println("Voltando ao menu principal...");
                 break;
 
                 default:

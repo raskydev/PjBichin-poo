@@ -57,7 +57,7 @@ public class EntradaCmd {
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("Valor inválida! Digite um número decimal!");
+                System.out.println("Valor inválido! Digite um número decimal!");
             }
         }
         return d;
