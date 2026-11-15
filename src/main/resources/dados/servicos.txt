@@ -1,0 +1,4 @@
+id;descricao;valor
+1;Banho;50.00
+2;Tosa;70.00
+3;Consulta veterinária;120.00

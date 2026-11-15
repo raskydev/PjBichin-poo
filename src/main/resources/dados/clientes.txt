@@ -1,2 +1,4 @@
 id;nome;telefone
-1;João da Silva;99999-1111
+1;João da Silva;(31) 99999-1111
+2;Maria Souza;(37) 98888-2222
+3;Carlos Lima;(37) 97777-3333
