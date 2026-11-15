@@ -1,6 +1,7 @@
 package br.edu.ifmg.bichin.visao.cmd;
 
 import br.edu.ifmg.bichin.controller.ClienteController;
+import br.edu.ifmg.bichin.model.Especie;
 import br.edu.ifmg.bichin.controller.PetController;
 import br.edu.ifmg.bichin.model.Pet;
 
@@ -42,31 +43,31 @@ public class UiCmdPet {
             switch (op) {
                 case 1:
                     adicionar();
-                break;
+                    break;
 
                 case 2:
                     alterar();
-                break;
+                    break;
 
                 case 3:
                     apagar();
-                break;
+                    break;
 
                 case 4:
                     listar();
-                break;
+                    break;
 
                 case 5:
                     buscar();
-                break;
+                    break;
 
                 case 0:
                     System.out.println("Voltando ao menu principal...");
-                break;
+                    break;
 
                 default:
                     System.out.println("Opção inválida! ");
-                break;
+                    break;
             }
         } while (op != 0);
     }
@@ -78,7 +79,7 @@ public class UiCmdPet {
 
             if (p == null) {
                 String nome = entrada.lerString("Digite o nome: ");
-                String especie = entrada.lerString("Digite a espécie: ");
+                Especie especie = entrada.lerEspecie("Escolher espécie: ");
                 String raca = entrada.lerString("Digite a raça: ");
                 LocalDate data = entrada.lerData("Digite a data de nascimento: ");
                 int idCliente;
@@ -135,7 +136,7 @@ public class UiCmdPet {
 
         if (p != null) {
             String novoNome = entrada.lerString("Digite o novo nome: ");
-            String novaEspecie = entrada.lerString("Digite a nova espécie: ");
+            Especie novaEspecie = entrada.lerEspecie("Escolha a nova espécie: ");
             String novaRaca = entrada.lerString("Digite a nova raça: ");
             LocalDate novaData = entrada.lerData("Digite a nova data de nascimento: ");
 
@@ -160,7 +161,6 @@ public class UiCmdPet {
             System.out.printf("\tPet [%d] não encontrado!\n", id);
         }
     }
-
 
     private void apagar() {
         int id = entrada.lerInteiro("Digite o ID do pet para EXCLUIR: ");

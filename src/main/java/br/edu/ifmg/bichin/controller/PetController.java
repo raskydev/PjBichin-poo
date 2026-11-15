@@ -2,6 +2,7 @@ package br.edu.ifmg.bichin.controller;
 
 import br.edu.ifmg.bichin.model.Cliente;
 import br.edu.ifmg.bichin.model.Pet;
+import br.edu.ifmg.bichin.model.Especie;
 import br.edu.ifmg.bichin.repository.ClienteRepository;
 import br.edu.ifmg.bichin.repository.PetRepository;
 
@@ -17,7 +18,6 @@ public class PetController {
         this.repositoryCliente = repositoryCliente;
     }
 
-
     public ArrayList<Pet> listar() {
         return repository.listar();
     }
@@ -27,7 +27,7 @@ public class PetController {
     }
 
     public void adicionar(
-            int id, String nome, String especie, String raca, LocalDate data, int clienteId) {
+            int id, String nome, Especie especie, String raca, LocalDate data, int clienteId) {
 
         Cliente c = repositoryCliente.buscarPorId(clienteId);
 

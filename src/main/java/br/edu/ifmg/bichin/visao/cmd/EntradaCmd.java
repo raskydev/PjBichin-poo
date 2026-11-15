@@ -1,5 +1,6 @@
 package br.edu.ifmg.bichin.visao.cmd;
 
+import br.edu.ifmg.bichin.model.Especie;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,9 +9,10 @@ import java.util.Scanner;
 
 // Essa parte foi desenvolvida além da especifiação do trabalho, que visa evitar o famoso Ctrl+C e Ctrl+V de código
 public class EntradaCmd {
-    private static final DateTimeFormatter FORMATO_DATA =
-            DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
-    // Para que datas impossíveis sejam recusadas, eg: 30/02, foi utilizado ResolverStyle.STRICT
+    private static final DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
+    // Para que datas impossíveis sejam recusadas, eg: 30/02, foi utilizado
+    // ResolverStyle.STRICT
 
     private Scanner teclado;
 
@@ -105,6 +107,27 @@ public class EntradaCmd {
             }
         }
         return d;
+    }
+
+    // Mostra as espécies aceitas e repete até que a escolha seja valida
+    public Especie lerEspecie(String texto) {
+        Especie[] especies = Especie.values(); // guarda em um array as quatro constantes
+
+        System.out.println(texto);
+        for (int i = 0; i < especies.length; i++) {
+            System.out.println("\t" + (i + 1) + ". " + especies[i]);
+        }
+
+        int opcao;
+        while (true) {
+            opcao = lerInteiro("Digite o numero da especie: ");
+            if (opcao >= 1 && opcao <= especies.length) {
+                break;
+            } else {
+                System.out.println("Opção invalida! Escolha um número entre 1 e " + especies.length + ".");
+            }
+        }
+        return especies[opcao - 1];
     }
 
 }

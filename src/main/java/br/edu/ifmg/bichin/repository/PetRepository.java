@@ -2,6 +2,7 @@ package br.edu.ifmg.bichin.repository;
 
 import br.edu.ifmg.bichin.model.Cliente;
 import br.edu.ifmg.bichin.model.Pet;
+import br.edu.ifmg.bichin.model.Especie;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,15 +12,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PetRepository {
-    private static final DateTimeFormatter FORMATO_DATA =
-            DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private ArrayList<Pet> pets;
 
     public PetRepository() {
         pets = new ArrayList<Pet>();
     }
-
 
     public boolean remover(int id) {
         for (int i = 0; i < pets.size(); i++) {
@@ -53,24 +52,31 @@ public class PetRepository {
                 if (tokens.length == 6) {
                     Cliente c = clienteRepository.buscarPorId(Integer.parseInt(tokens[4].trim()));
                     if (c != null) {
+                        Especie especie;
+                        try {
+                            especie = Especie.valueOf(tokens[2].trim().toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Linha ignorada! Espécie inválida: " + tokens[2]);
+                            continue; // pula para a próxima linha do arquivo
+                        }
+
                         Pet pet = new Pet(
-                            Integer.parseInt(tokens[0].trim()),
-                            tokens[1],
-                            tokens[2],
-                            tokens[3],
-                            c,
-                            LocalDate.parse(tokens[5], FORMATO_DATA)
-                        );
+                                Integer.parseInt(tokens[0].trim()),
+                                tokens[1],
+                                especie,
+                                tokens[3],
+                                c,
+                                LocalDate.parse(tokens[5], FORMATO_DATA));
                         adicionar(pet);
                     }
                 }
             }
+        }
 
-        } catch (FileNotFoundException e) {
+        catch (FileNotFoundException e) {
             throw new RuntimeException(
                     "Erro no carregamento do arquivo!",
-                    e
-            );
+                    e);
         }
     }
 

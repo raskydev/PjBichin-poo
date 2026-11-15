@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Pet {
     private int id;
     private String nome;
-    private String especie;
+    private Especie especie; // atributo do tipo enum Especie
     private String raca;
     private Cliente cliente;
     private LocalDate nascimento;
@@ -16,7 +16,7 @@ public class Pet {
         this.cliente = new Cliente();
     }
 
-    public Pet(int id, String nome, String especie, String raca, Cliente cliente, LocalDate nascimento) {
+    public Pet(int id, String nome, Especie especie, String raca, Cliente cliente, LocalDate nascimento) {
         this.id = id;
         this.nome = nome;
         this.especie = especie;
@@ -37,7 +37,7 @@ public class Pet {
         return Period.between(this.nascimento, LocalDate.now()).getYears();
     }
 
-    public void setEspecie(String especie) {
+    public void setEspecie(Especie especie) {
         this.especie = especie;
     }
 
@@ -74,7 +74,7 @@ public class Pet {
         return Objects.hash(id);
     }
 
-    public String getEspecie() {
+    public Especie getEspecie() {
         return especie;
     }
 
@@ -96,7 +96,8 @@ public class Pet {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Pet pet = (Pet) o;
         return id == pet.id;
     }
