@@ -1,4 +1,5 @@
-id;descricao;valor
-1;Banho;50.00
-2;Tosa;70.00
-3;Consulta veterinária;120.00
+id;descricao;valor;tipo;extra
+1;Banho;50.00;INTERNO;CRMV-MG 12345
+2;Tosa;70.00;INTERNO;CRMV-MG 12345
+3;Consulta veterinária;120.00;INTERNO;CRMV-MG 67890
+4;Acupuntura;80.00;EXTERNO;40.00

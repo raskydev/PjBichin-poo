@@ -2,6 +2,8 @@ package br.edu.ifmg.bichin.visao.cmd;
 
 import br.edu.ifmg.bichin.controller.ServicoController;
 import br.edu.ifmg.bichin.model.Servico;
+import br.edu.ifmg.bichin.model.ServicoExterno;
+import br.edu.ifmg.bichin.model.ServicoInterno;
 
 import java.util.ArrayList;
 
@@ -34,31 +36,31 @@ public class UiCmdServico {
             switch (op) {
                 case 1:
                     adicionar();
-                break;
+                    break;
 
                 case 2:
                     alterar();
-                break;
+                    break;
 
                 case 3:
                     apagar();
-                break;
+                    break;
 
                 case 4:
                     listar();
-                break;
+                    break;
 
                 case 5:
                     buscar();
-                break;
+                    break;
 
                 case 0:
                     System.out.println("Voltando ao menu principal...");
-                break;
+                    break;
 
                 default:
                     System.out.println("Opção inválida! ");
-                break;
+                    break;
             }
         } while (op != 0);
     }
@@ -74,6 +76,13 @@ public class UiCmdServico {
 
             s.setDescricao(novaDescricao);
             s.setValor(novoValor);
+            
+            // Cada tipo tem um dado próprio que também pode ser alterado
+            if (s instanceof ServicoInterno interno) {
+                interno.setCrmv(entrada.lerString("Digite o novo CRMV: "));
+            } else if (s instanceof ServicoExterno externo) {
+                externo.setValorTerceirizado(entrada.lerValor("Digite o novo valor do terceirizado: "));
+            }
 
             System.out.printf("\tServiço [%d] alterado com sucesso!\n", id);
         } else {
@@ -101,7 +110,27 @@ public class UiCmdServico {
                 String descricao = entrada.lerString("Digite a descrição: ");
                 double valor = entrada.lerValor("Digite o valor: ");
 
-                controller.adicionar(id, descricao, valor);
+                // Pergunta o tipo até o usuário digitar 1 ou 2
+                int tipo;
+                while (true) {
+                    tipo = entrada.lerInteiro("Qual o tipo do serviço: 1) Interno ou 2) Externo: ");
+                    if (tipo == 1 || tipo == 2) {
+                        break;
+                    }
+                    System.out.println("Opção inválida! Digite 1 ou 2.");
+                }
+
+                // Interno guarda o CRMV; externo guarda o valor do terceirizado
+                String responsavel = null;
+
+                double valorTerceirizado = 0;
+                if (tipo == 1) {
+                    responsavel = entrada.lerString("CRMV do responsável pelo serviço: ");
+                } else {
+                    valorTerceirizado = entrada.lerValor("Valor do serviço terceirizado: ");
+                }
+
+                controller.adicionar(id, descricao, valor, responsavel, valorTerceirizado);
                 System.out.printf("Serviço [%d] cadastrado com sucesso!\n", id);
                 break;
             } else {

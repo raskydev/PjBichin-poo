@@ -2,7 +2,7 @@ package br.edu.ifmg.bichin.model;
 
 import java.util.Objects;
 
-public class Servico {
+public abstract class Servico {
     private String descricao;
     private int id;
     private double valor;
@@ -59,5 +59,7 @@ public class Servico {
     public double getValor() {
         return valor;
     }
-
+    
+    // Cada tipo de serviço calcula o seu valor final de forma diferente
+    public abstract double valorFinalDoServico();
 }
