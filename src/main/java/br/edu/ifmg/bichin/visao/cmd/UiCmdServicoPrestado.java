@@ -5,6 +5,7 @@ import br.edu.ifmg.bichin.controller.ServicoPrestadoController;
 import br.edu.ifmg.bichin.model.Cliente;
 import br.edu.ifmg.bichin.model.Pet;
 import br.edu.ifmg.bichin.model.ServicoPrestado;
+import br.edu.ifmg.bichin.model.Servico;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,14 +47,41 @@ public class UiCmdServicoPrestado {
             ServicoPrestado sp = controller.buscar(id);
 
             if (sp == null) {
-                int idServico = entrada.lerInteiro("Digite o ID do serviço: ");
-                int idPet = entrada.lerInteiro("Digite o ID do pet: ");
-                double valor = entrada.lerValor("Digite o valor: ");
+                // Confirma que o serviço existe e mostra o serviço e o valor antes de pedir o
+                // valor cobrado
+                int idServico;
+                Servico servico;
+                while (true) {
+                    idServico = entrada.lerInteiro("Digite o ID do serviço: ");
+                    servico = controller.buscarServico(idServico);
+                    if (servico != null) {
+                        break;
+                    }
+                    System.out.printf("\tServiço [%d] não encontrado! Tente novamente.\n", idServico);
+                }
+                System.out.println(servico);
+                System.out.printf("Valor do serviço: %.2f\n", servico.valorFinalDoServico());
+
+                int idPet;
+                while (true) {
+                    idPet = entrada.lerInteiro("Digite o ID do pet: ");
+                    if (controller.buscarPet(idPet) != null) {
+                        break;
+                    }
+                    System.out.printf("\tPet [%d] não encontrado! Tente novamente.\n", idPet);
+                }
+
+                double valor = entrada.lerValor("Digite o valor cobrado: ");
                 LocalDate data = entrada.lerData("Digite a data: ");
 
-                controller.adicionar(id, idServico, idPet, valor, data);
-                System.out.printf("Serviço prestado [%d] cadastrado com sucesso!\n", id);
-                break;
+                try {
+                    controller.adicionar(id, idServico, idPet, valor, data);
+                    System.out.printf("Serviço prestado [%d] cadastrado com sucesso!\n", id);
+                    break;
+                } catch (IllegalArgumentException e) {
+                    // Regra de negócio violada no service (data no passado ou valor negativo)
+                    System.out.println("Erro! " + e.getMessage() + " Tente novamente.\n");
+                }
             } else {
                 System.out.println("Erro! ID já existe! Tente novamente.\n");
             }
@@ -116,43 +144,43 @@ public class UiCmdServicoPrestado {
             switch (op) {
                 case 1:
                     adicionar();
-                break;
+                    break;
 
                 case 2:
                     apagar();
-                break;
+                    break;
 
                 case 3:
                     listar();
-                break;
+                    break;
 
                 case 4:
                     buscar();
-                break;
+                    break;
 
                 case 5:
                     maiorValor();
-                break;
+                    break;
 
                 case 6:
                     servicosPorPeriodo();
-                break;
+                    break;
 
                 case 7:
                     servicosDoCliente();
-                break;
+                    break;
 
                 case 8:
                     animaisDoDono();
-                break;
+                    break;
 
                 case 0:
                     System.out.println("Voltando ao menu principal...");
-                break;
+                    break;
 
                 default:
                     System.out.println("Opção inválida! ");
-                break;
+                    break;
             }
         } while (op != 0);
     }

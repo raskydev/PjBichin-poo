@@ -8,6 +8,7 @@ import br.edu.ifmg.bichin.repository.ClienteRepository;
 import br.edu.ifmg.bichin.repository.PetRepository;
 import br.edu.ifmg.bichin.repository.ServicoPrestadoRepository;
 import br.edu.ifmg.bichin.repository.ServicoRepository;
+import br.edu.ifmg.bichin.service.ServicoPrestadoService;
 import br.edu.ifmg.bichin.visao.cmd.*;
 
 /*
@@ -41,6 +42,10 @@ public class Main {
                 "src/main/resources/dados/servicos_prestados.txt",
                 petRepository, servicoRepository);
 
+        // Criando a camada de serviço, que recebe o repository
+        ServicoPrestadoService servicoPrestadoService =
+                new ServicoPrestadoService(servicoPrestadoRepository);
+
         // Criando os objetos das classes controllers
         ClienteController clienteController =
                 new ClienteController(clienteRepository, petRepository);
@@ -52,7 +57,7 @@ public class Main {
                 new ServicoPrestadoController(
                         petRepository,
                         servicoRepository,
-                        servicoPrestadoRepository);
+                        servicoPrestadoService);
 
         // Criando as classes de interface do usuário (UIs) informando a classe de controller que ela deve manipular
         EntradaCmd entrada = new EntradaCmd();
@@ -75,7 +80,7 @@ public class Main {
                         menuServicoPrestado
                 );
 
-        // Gloria in excelsis Deo :)
+        // Iniciando a execução do programa
         UICmd.iniciar();
     }
 }
